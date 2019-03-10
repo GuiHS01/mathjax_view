@@ -16,8 +16,6 @@ public class SwiftMathjaxViewPlugin: NSObject, FlutterPlugin {
         return
       }
 
-      let controller: FlutterViewController = UIApplication.shared.keyWindow?.rootViewController as! FlutterViewController
-
 
       // result("iOS " + UIDevice.current.systemVersion)
     }
