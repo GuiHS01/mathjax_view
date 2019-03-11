@@ -8,8 +8,11 @@ import io.flutter.plugin.platform.PlatformViewFactory
 
 class MathjaxViewFactory(private val messenger: BinaryMessenger): PlatformViewFactory(StandardMessageCodec.INSTANCE) {
 
-  override fun create(context: Context, id: Int, args: Any): PlatformView {
-    val params = args as Map<String, Any>
-    return MathjaxView(context, messenger, id, params)
-  }
+    override fun create(context: Context, id: Int, args: Any?): PlatformView {
+        var params: Map<String, Any>? = null
+        if (args != null) {
+            params = args as Map<String, Any>
+        }
+        return MathjaxView(context, messenger, id, params)
+    }
 }

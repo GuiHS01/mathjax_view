@@ -9,7 +9,7 @@ import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.platform.PlatformView
 
-class MathjaxView(context: Context, messenger: BinaryMessenger, id: Int, params: Map<String, Any>): PlatformView, MethodCallHandler {
+class MathjaxView(context: Context, messenger: BinaryMessenger, id: Int, params: Map<String, Any>?): PlatformView, MethodCallHandler {
     private val webView: WebView
 
     private val methodChannel: MethodChannel
@@ -17,7 +17,19 @@ class MathjaxView(context: Context, messenger: BinaryMessenger, id: Int, params:
     init {
         webView = WebView(context)
 
-        webView.loadDataWithBaseURL(null, contentHtml("test $4x=y$"), "text/html", "utf-8", null)
+        webView.apply {
+            settings.apply {
+                javaScriptEnabled = true
+                setSupportZoom(true)
+                loadWithOverviewMode = true
+                useWideViewPort = true
+                domStorageEnabled = true
+            }
+//            webChromeClient = WebChromeClient()
+//            webViewClient = WebViewClient()
+        }
+
+        webView.loadDataWithBaseURL(null, contentHtml("test $4x=y$ 日本語対応確認", 40), "text/html", "utf-8", null)
 
         methodChannel = MethodChannel(messenger, "com.dev.touyou/mathjax_view_${id}")
         methodChannel.setMethodCallHandler(this)
@@ -39,12 +51,18 @@ class MathjaxView(context: Context, messenger: BinaryMessenger, id: Int, params:
 
     // MARK: Mathjax Logic
 
-    private fun mathJaxScript(): String = "<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>"
+    private fun mathJaxScript(): String = "<script async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML&locale=ja'></script>"
 
     private fun configScript(): String = "<script type=\"text/x-mathjax-config\">" + "MathJax.Hub.Config({jax: [\"input/TeX\",\"output/HTML-CSS\"], tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]} , \"HTML-CSS\": {linebreaks: {automatic: true}}});" + "</script>"
 
-    private fun contentHtml(latexString: String): String {
-        val header = configScript() + mathJaxScript()
+    private fun styleScript(fontSize: Int?): String {
+        val size = fontSize ?: 50
+        return "<style>body { font-size: ${size}px; }</style>"
+    }
+
+    private fun contentHtml(latexString: String, fontSize: Int?): String {
+        val header = configScript() + mathJaxScript() + styleScript(fontSize)
+        print(header)
         return "<html><header>${header}</header><body>${latexString}</body></html>"
     }
 }

@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/mathjax_view.iml" filepath="$PROJECT_DIR$/mathjax_view.iml" />
-      <module fileurl="file://$PROJECT_DIR$/android/mathjax_view_android.iml" filepath="$PROJECT_DIR$/android/mathjax_view_android.iml" />
-      <module fileurl="file://$PROJECT_DIR$/example/android/mathjax_view_example_android.iml" filepath="$PROJECT_DIR$/example/android/mathjax_view_example_android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/mathjax_view.iml" filepath="$PROJECT_DIR$/.idea/mathjax_view.iml" />
     </modules>
   </component>
 </project>
