@@ -10,9 +10,11 @@ class MathjaxView extends StatefulWidget {
   MathjaxView({
     Key key,
     this.onMathjaxViewCreated,
+    this.fontSize,
   }) : super(key: key);
 
   final MathjaxViewCreatedCallback onMathjaxViewCreated;
+  final int fontSize;
 
   @override
   State<StatefulWidget> createState() => _MathjaxViewState();
@@ -25,12 +27,20 @@ class _MathjaxViewState extends State<MathjaxView> {
       return AndroidView(
         viewType: 'com.dev.touyou/mathjax_view',
         onPlatformViewCreated: _onPlatformViewCreated,
+        creationParams: <String, dynamic>{
+          "fontSize": widget.fontSize,
+        },
+        creationParamsCodec: new StandardMessageCodec(),
       );
     }
     if (defaultTargetPlatform == TargetPlatform.iOS) {
       return UiKitView(
         viewType: 'com.dev.touyou/mathjax_view',
         onPlatformViewCreated: _onPlatformViewCreated,
+        creationParams: <String, dynamic>{
+          "fontSize": widget.fontSize,
+        },
+        creationParamsCodec: new StandardMessageCodec(),
       );
     }
 

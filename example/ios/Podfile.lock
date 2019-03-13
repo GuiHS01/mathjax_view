@@ -1,0 +1,22 @@
+PODS:
+  - Flutter (1.0.0)
+  - mathjax_view (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `.symlinks/flutter/ios`)
+  - mathjax_view (from `.symlinks/plugins/mathjax_view/ios`)
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: ".symlinks/flutter/ios"
+  mathjax_view:
+    :path: ".symlinks/plugins/mathjax_view/ios"
+
+SPEC CHECKSUMS:
+  Flutter: 58dd7d1b27887414a370fcccb9e645c08ffd7a6a
+  mathjax_view: a699aa2b0a107a100ca36862510fb0fcebe30493
+
+PODFILE CHECKSUM: ebd43b443038e611b86ede96e613bd6033c49497
+
+COCOAPODS: 1.6.1

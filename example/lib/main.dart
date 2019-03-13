@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
-
-//import 'package:flutter/services.dart';
 import 'package:mathjax_view/mathjax_view.dart';
+//import 'package:flutter/services.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,32 +10,11 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-//  String _platformVersion = 'Unknown';
+  MathjaxViewController controller;
 
   @override
   void initState() {
     super.initState();
-    initPlatformState();
-  }
-
-  // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
-//    String platformVersion;
-//    // Platform messages may fail, so we use a try/catch PlatformException.
-//    try {
-//      platformVersion = await MathjaxView.platformVersion;
-//    } on PlatformException {
-//      platformVersion = 'Failed to get platform version.';
-//    }
-//
-//    // If the widget was removed from the tree while the asynchronous platform
-//    // message was in flight, we want to discard the reply rather than calling
-//    // setState to update our non-existent appearance.
-//    if (!mounted) return;
-//
-//    setState(() {
-//      _platformVersion = platformVersion;
-//    });
   }
 
   @override
@@ -48,15 +25,21 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: Container(
-              decoration: BoxDecoration(color: Colors.red, shape: BoxShape.rectangle),
-              child: MathjaxView(onMathjaxViewCreated: _onMathjaxViewCreated)),
+          child: SizedBox(
+              width: 300,
+              height: 200,
+              child: MathjaxView(
+                onMathjaxViewCreated: _onMathjaxViewCreated,
+                fontSize: 20,
+              )),
         ),
       ),
     );
   }
 
-  void _onMathjaxViewCreated(MathjaxViewController controller) {
-    return;
+  void _onMathjaxViewCreated(MathjaxViewController _controller) {
+    controller = _controller;
+    controller.setLatexText(
+        'This is set test \$4x - 2y\\frac{4}{2x}=0\$ <br /> 日本語もいける');
   }
 }

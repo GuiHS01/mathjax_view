@@ -13,6 +13,7 @@ class MathjaxView(context: Context, messenger: BinaryMessenger, id: Int, params:
     private val webView: WebView
 
     private val methodChannel: MethodChannel
+    private val _fontSize: Int?
 
     init {
         webView = WebView(context)
@@ -20,16 +21,16 @@ class MathjaxView(context: Context, messenger: BinaryMessenger, id: Int, params:
         webView.apply {
             settings.apply {
                 javaScriptEnabled = true
-                setSupportZoom(true)
+                setSupportZoom(false)
                 loadWithOverviewMode = true
                 useWideViewPort = true
                 domStorageEnabled = true
             }
-//            webChromeClient = WebChromeClient()
-//            webViewClient = WebViewClient()
         }
 
-        webView.loadDataWithBaseURL(null, contentHtml("test $4x=y$ 日本語対応確認", 40), "text/html", "utf-8", null)
+        _fontSize = params?.get("fontSize") as Int
+
+        webView.loadDataWithBaseURL(null, contentHtml("Please set text", _fontSize), "text/html", "utf-8", null)
 
         methodChannel = MethodChannel(messenger, "com.dev.touyou/mathjax_view_${id}")
         methodChannel.setMethodCallHandler(this)
@@ -41,12 +42,18 @@ class MathjaxView(context: Context, messenger: BinaryMessenger, id: Int, params:
 
     override fun onMethodCall(methodCall: MethodCall, result: MethodChannel.Result) {
         when (methodCall.method) {
-            "loadText" -> return
+            "setLatexText" -> setLatexText(methodCall, result)
             else -> result.notImplemented()
         }
     }
 
     override fun dispose() {
+    }
+
+    private fun setLatexText(methodCall: MethodCall, result: MethodChannel.Result) {
+        val latexString = methodCall.arguments as String
+        webView.loadDataWithBaseURL(null, contentHtml(latexString, _fontSize), "text/html", "utf-8", null)
+        result.success(null)
     }
 
     // MARK: Mathjax Logic
@@ -56,13 +63,12 @@ class MathjaxView(context: Context, messenger: BinaryMessenger, id: Int, params:
     private fun configScript(): String = "<script type=\"text/x-mathjax-config\">" + "MathJax.Hub.Config({jax: [\"input/TeX\",\"output/HTML-CSS\"], tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]} , \"HTML-CSS\": {linebreaks: {automatic: true}}});" + "</script>"
 
     private fun styleScript(fontSize: Int?): String {
-        val size = fontSize ?: 50
+        val size = fontSize ?: 28
         return "<style>body { font-size: ${size}px; }</style>"
     }
 
     private fun contentHtml(latexString: String, fontSize: Int?): String {
         val header = configScript() + mathJaxScript() + styleScript(fontSize)
-        print(header)
-        return "<html><header>${header}</header><body>${latexString}</body></html>"
+        return "<html><header><meta name=\"viewport\" content=\"initial-scale=1.0\">${header}</header><body>${latexString}</body></html>"
     }
 }
