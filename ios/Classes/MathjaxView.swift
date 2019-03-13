@@ -53,6 +53,7 @@ public class MathjaxView: NSObject, FlutterPlatformView {
 
     private func mathJaxScript() -> String {
         return "<script async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML&locale=ja'></script>"
+//        return "<script src='MathJax-2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML&locale=ja'></script>"
     }
 
     private func configScript() -> String {
