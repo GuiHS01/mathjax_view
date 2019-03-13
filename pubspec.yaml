@@ -1,8 +1,8 @@
 name: mathjax_view
-description: A new flutter plugin project.
+description: Flutter Math Rendering Widget supported by mathjax
 version: 0.0.1
-author:
-homepage:
+author: touyou
+homepage: http://touyou.github.io
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
