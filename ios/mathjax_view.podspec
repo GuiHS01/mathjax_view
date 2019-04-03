@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
   s.version          = '0.0.8'
   s.summary          = 'Flutter Math Rendering Widget supported by mathjax'
   s.description      = <<-DESC
-Flutter math rendering widget by mathjax. For flutters.
+Flutter math rendering widget by mathjax. For flutter.
                        DESC
   s.homepage         = 'http://touyou.github.io'
   s.license          = { :file => '../LICENSE' }
