@@ -28,8 +28,9 @@ public class MathjaxView: NSObject, FlutterPlatformView {
 
     public func view() -> UIView {
         texView = UIWebView(frame: frame)
-        texView.backgroundColor = UIColor.white
-        
+        texView.backgroundColor = UIColor.clear
+        texView.isOpaque = false
+
         texView.loadHTMLString(contentHtml(with: "Please set text", fontSize: _fontSize), baseURL: nil)
         return texView
     }
@@ -63,7 +64,7 @@ public class MathjaxView: NSObject, FlutterPlatformView {
     }
 
     private func styleScript(_ fontSize: Int?) -> String {
-        return "<style>body { font-size: \(fontSize ?? 28)px; }</style>"
+        return "<style>body { font-size: \(fontSize ?? 28)px; background-color: #ffffff; }</style>"
     }
 
     private func contentHtml(with latexString: String, fontSize: Int?) -> String {
