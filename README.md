@@ -7,7 +7,7 @@ Flutter Math Rendering Widget by MathJax.js
 Add `pubspec.yaml` dependencies.
 
 ```
-mathjax_view: ^0.0.8
+mathjax_view: ^0.1.0
 ```
 
 then run the `flutter packages get`

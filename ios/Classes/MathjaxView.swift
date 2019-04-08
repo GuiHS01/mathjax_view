@@ -58,9 +58,19 @@ public class MathjaxView: NSObject, FlutterPlatformView {
     }
 
     private func configScript() -> String {
-        return "<script type=\"text/x-mathjax-config\">"
-            + "MathJax.Hub.Config({jax: [\"input/TeX\",\"output/HTML-CSS\"], tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]} , \"HTML-CSS\": {linebreaks: {automatic: true}}});"
-            + "</script>"
+        return #"""
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            jax: ["input/TeX","output/HTML-CSS"],
+            tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+            showMathMenu: false,
+            MathMenu: {
+                showRenderer: false
+            },
+            messageStyle: "none",
+            "HTML-CSS": {linebreaks: {automatic: true}}});
+        </script>
+        """#
     }
 
     private func styleScript(_ fontSize: Int?) -> String {

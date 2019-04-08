@@ -60,7 +60,19 @@ class MathjaxView(context: Context, messenger: BinaryMessenger, id: Int, params:
 
     private fun mathJaxScript(): String = "<script async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML&locale=ja'></script>"
 
-    private fun configScript(): String = "<script type=\"text/x-mathjax-config\">" + "MathJax.Hub.Config({jax: [\"input/TeX\",\"output/HTML-CSS\"], tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]} , \"HTML-CSS\": {linebreaks: {automatic: true}}});" + "</script>"
+    private fun configScript(): String = """
+    <script type=\"text/x-mathjax-config\">
+    MathJax.Hub.Config({
+        jax: [\"input/TeX\",\"output/HTML-CSS\"],
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+        showMathMenu: false,
+        MathMenu: {
+            showRenderer: false
+        },
+        messageStyle: \"none\",
+        \"HTML-CSS\": {linebreaks: {automatic: true}}});
+    </script>
+    """
 
     private fun styleScript(fontSize: Int?): String {
         val size = fontSize ?: 28

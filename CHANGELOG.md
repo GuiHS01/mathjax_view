@@ -1,3 +1,7 @@
+## 0.1.0
+
+* Remove loading view
+
 ## 0.0.10
 
 * Remove iOS line.
