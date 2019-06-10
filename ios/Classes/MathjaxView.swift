@@ -47,6 +47,7 @@ public class MathjaxView: NSObject, FlutterPlatformView {
     private func setLatexText(call: FlutterMethodCall, result: @escaping FlutterResult) {
         let latexString = call.arguments as! String
         texView.loadHTMLString(contentHtml(with: latexString, fontSize: _fontSize), baseURL: nil)
+        print(texView.stringByEvaluatingJavaScript(from: "MathJax.Hub.Queue(function () {document.getElementById(\"latex\").visibility = \"visible\"; });"))
         result(nil)
     }
 
@@ -68,17 +69,24 @@ public class MathjaxView: NSObject, FlutterPlatformView {
                 showRenderer: false
             },
             messageStyle: "none",
-            "HTML-CSS": {linebreaks: {automatic: true}}});
+            "HTML-CSS": {
+                linebreaks: {automatic: true},
+                availableFonts: ["TeX"],
+                undefinedFamily: "'Raleway', Helvetica, Arial, sans-serif"
+            }});
+        </script>
+        <script>
+
         </script>
         """#
     }
 
     private func styleScript(_ fontSize: Int?) -> String {
-        return "<style>body { font-size: \(fontSize ?? 28)px; background-color: #ffffff; }</style>"
+        return "<style>body { font-size: \(fontSize ?? 28)px; background-color: #ffffff; } #latex { visibility: visible; } </style>"
     }
 
     private func contentHtml(with latexString: String, fontSize: Int?) -> String {
         let header = configScript() + mathJaxScript() + styleScript(fontSize)
-        return "<html><header><meta name=￥\"viewport\" content=\"initial-scale=1.0\">\(header)</header><body>\(latexString)</body></html>"
+        return "<html><header><meta name=\"viewport\" content=\"initial-scale=1.0\">\(header)</header><body><div id=\"latex\">\(latexString)</div></body></html>"
     }
 }

@@ -70,7 +70,11 @@ class MathjaxView(context: Context, messenger: BinaryMessenger, id: Int, params:
             showRenderer: false
         },
         messageStyle: \"none\",
-        \"HTML-CSS\": {linebreaks: {automatic: true}}});
+        \"HTML-CSS\": {
+            linebreaks: {automatic: true},
+            availableFonts: ["TeX"],
+            undefinedFamily: "'Raleway', Helvetica, Arial, sans-serif"
+        }});
     </script>
     """
 

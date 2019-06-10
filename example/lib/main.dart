@@ -37,6 +37,7 @@ class _MyAppState extends State<MyApp> {
               ),
               MaterialButton(
                 onPressed: () {
+                  print('on pressed $controller');
                   controller.setLatexText(
                       '\$\\begin{split}&t=e^x+1~,\\quad e^x = t-1,\\quad e^x\\,dx=dt\\\\&\\begin{split}&\\int \\frac{e^{2x}}{(e^x+1)^2}\\,dx\\\\&= \\int \\frac{t-1}{t^2}\\,dt\\\\&= \\int\\left(\\frac{1}{t}-\\frac{1}{t^2}\\right)dt\\\\&= \\log |t|+\\frac{1}{t}+C\\\\&= { \\log (e^x+1)+\\frac{1}{e^x+1}+C }\\end{split}\\end{split}\$');
                 },
@@ -46,6 +47,7 @@ class _MyAppState extends State<MyApp> {
               ),
               MaterialButton(
                 onPressed: () {
+                  print('on pressed $controller');
                   controller.setLatexText(
                       'This is set test \$4x - 2y\\frac{4}{2x}=0\$ <br /> 日本語もいける');
                 },
@@ -63,6 +65,6 @@ class _MyAppState extends State<MyApp> {
   void _onMathjaxViewCreated(MathjaxViewController _controller) {
     controller = _controller;
     controller.setLatexText(
-        'This is set test \$4x - 2y\\frac{4}{2x}=0\$ <br /> 日本語もいける');
+        '\$\\begin{split}&t=e^x+1~,\\quad e^x = t-1,\\quad e^x\\,dx=dt\\\\&\\begin{split}&\\int \\frac{e^{2x}}{(e^x+1)^2}\\,dx\\\\&= \\int \\frac{t-1}{t^2}\\,dt\\\\&= \\int\\left(\\frac{1}{t}-\\frac{1}{t^2}\\right)dt\\\\&= \\log |t|+\\frac{1}{t}+C\\\\&= { \\log (e^x+1)+\\frac{1}{e^x+1}+C }\\end{split}\\end{split}\$');
   }
 }
