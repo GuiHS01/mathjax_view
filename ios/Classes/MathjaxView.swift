@@ -70,7 +70,7 @@ public class MathjaxView: NSObject, FlutterPlatformView {
             },
             messageStyle: "none",
             "HTML-CSS": {
-                linebreaks: {automatic: true},
+                linebreaks: {automatic: false},
                 availableFonts: ["TeX"],
                 undefinedFamily: "'Raleway', Helvetica, Arial, sans-serif"
             }});

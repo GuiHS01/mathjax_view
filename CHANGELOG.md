@@ -1,3 +1,7 @@
+# 0.1.2
+
+* linebreaks off
+
 ## 0.1.1
 
 * Remove loading view
