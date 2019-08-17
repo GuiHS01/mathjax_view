@@ -1,6 +1,7 @@
 name: mathjax_view_example
 description: Demonstrates how to use the mathjax_view plugin.
 publish_to: 'none'
+version: 1.0.0+1
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -16,6 +17,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+  http_server: any
 
   mathjax_view:
     path: ../

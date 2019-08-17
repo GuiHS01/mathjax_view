@@ -11,10 +11,12 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   MathjaxViewController controller;
+  MathjaxServer server;
 
   @override
   void initState() {
     super.initState();
+    server.start();
   }
 
   @override

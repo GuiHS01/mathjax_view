@@ -54,7 +54,7 @@ public class MathjaxView: NSObject, FlutterPlatformView {
     // MARK: - Mathjax Logic
 
     private func mathJaxScript() -> String {
-        return "<script async src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML&locale=ja'></script>"
+        return "<script async src='http://localhost:8080/packages/mathjax_view/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML&locale=ja'></script>"
 //        return "<script src='MathJax-2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML&locale=ja'></script>"
     }
 
